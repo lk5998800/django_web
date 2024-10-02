@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
+from .views import MainPageView
 
 urlpatterns = [
-    path('', views.main_page, name='service'),  # 将 '/' 路径映射到 main_page 视图
+    path('', MainPageView.as_view(), name='api-homepage'),  # 将 '/' 路径映射到 main_page 视图
 ]
