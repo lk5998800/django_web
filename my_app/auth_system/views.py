@@ -26,6 +26,9 @@ class RegisterView(APIView):
     @swagger_auto_schema(request_body=RegisterSerializer)
     def post(self, request):
         serializer = RegisterSerializer(data=request.data, context={'request': request})
+        session_id = request.session.session_key
+        print("当前 session ID:", session_id)
+        print(request.session['img_captcha'])
         if serializer.is_valid():
             serializer.save()
             # 注册成功后自动登录用户
@@ -43,7 +46,11 @@ class ImageCaptchaView(APIView):
         image = ImageCaptcha()
         captcha_text = ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
         data = image.generate(captcha_text)
-        request.session['img_captcha'] = captcha_text  # 将验证码文本存储在会话中
+        request.session['img_captcha'] = captcha_text
+        request.session.save()
+        session_id = request.session.session_key
+        print("当前 session ID:", session_id)
+        print(request.session['img_captcha'])
         return HttpResponse(data, content_type='image/png')
 
 # 登录视图

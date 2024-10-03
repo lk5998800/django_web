@@ -10,5 +10,4 @@ urlpatterns = [
     path('user/<str:username>/', UserDetailView.as_view(), name='api-user-detail'),
     path('current_user/', CurrentUserView.as_view(), name='api-current-user'),
 
-    # 其他路由
 ]

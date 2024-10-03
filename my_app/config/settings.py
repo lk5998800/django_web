@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'auth_system',
     'rest_framework',
     'drf_yasg',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,14 +32,27 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# 默认使用数据库存储会话
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+# 使用缓存存储会话的示例（确保缓存配置正常）
+# SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+# 其他相关配置，例如设置 session 过期时间
+SESSION_COOKIE_AGE = 1209600  # 两周的 session 有效期
+SESSION_SAVE_EVERY_REQUEST = True
+
+CORS_ALLOW_ALL_ORIGINS = True  # 或者设置特定域名
 
 ROOT_URLCONF = 'config.urls'
 
@@ -136,3 +150,9 @@ SWAGGER_SETTINGS = {
         }
     },
 }
+
+# 允许跨域请求
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8080', 'http://localhost:8000', 'http://127.0.0.1:8080']
+

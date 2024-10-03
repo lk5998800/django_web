@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <!-- 导航栏，右上角放置登录和注册链接 -->
+    <!-- Navbar with login and register links on the right -->
     <nav>
       <ul>
-        <li><router-link to="/">主页</router-link></li>
-        <li><router-link to="/login">登录</router-link></li>
-        <li><router-link to="/register">注册</router-link></li>
+        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/login">Login</router-link></li>
+        <li><router-link to="/register">Register</router-link></li>
       </ul>
     </nav>
 
-    <!-- 动态路由页面 -->
+    <!-- Dynamic routing page -->
     <router-view />
   </div>
 </template>
@@ -30,7 +30,7 @@ export default {
   margin-top: 60px;
 }
 
-/* 导航栏样式 */
+/* Navbar styles */
 nav {
   position: absolute;
   top: 10px;
